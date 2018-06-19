@@ -2,3 +2,7 @@ Server(API): C:\Users\drewh\source\repos\eCommerceAPI
 	secrets.json goes in Manage User Secrets for API
 
 Client(Client): C:\inetpub\wwwroot\MyEcommerceSite
+
+
+
+hello
