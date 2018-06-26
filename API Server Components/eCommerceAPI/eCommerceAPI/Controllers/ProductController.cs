@@ -9,8 +9,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace eCommerceAPI.Controllers
 {
-   
-    [Route("api/product")]
     public class ProductController : Controller
     {
         IGenericEFRepository _rep;
@@ -21,6 +19,7 @@ namespace eCommerceAPI.Controllers
         }
 
         // GET api/product
+        [Route("api/product")]
         [HttpGet]
         public IActionResult Get()
         {
@@ -30,6 +29,7 @@ namespace eCommerceAPI.Controllers
         }
 
         // GET api/product/:productId:
+        [Route("api/product/{productId}")]
         [HttpGet("{productId}", Name = "GetGenericProduct")]
         public IActionResult Get(int productId)
         {
@@ -40,9 +40,21 @@ namespace eCommerceAPI.Controllers
             return Ok(DTOs);
         }
 
+        // GET api/product/Category:categoryId:
+        [Route("api/product/category/{categoryId}")]
+        [HttpGet]
+        public IActionResult Category(int categoryId)
+        {
+            // In here you will add the code to return the products whose MainCategoryId is equal to categoryId above
+            // The method above "api/product/{productId} is VERY similar
+
+            return Ok("hello! The category Id you chose is: " + categoryId);
+        }
+
         //Require valid JWT
-        [Authorize] 
-        // POST api/product/   
+        [Authorize]
+        // POST api/product/
+        [Route("api/product")]
         [HttpPost]
         public IActionResult Post([FromBody]ProductDTO DTO)
         {
@@ -65,6 +77,7 @@ namespace eCommerceAPI.Controllers
         //Require valid JWT
         [Authorize]
         // DELETE api/product/:productId:
+        [Route("api/product")]
         [HttpDelete("{productId}")]
         public IActionResult Delete(int productId)
         {
@@ -83,6 +96,7 @@ namespace eCommerceAPI.Controllers
         //Require valid JWT
         [Authorize]
         // PUT api/product/:productId:
+        [Route("api/product")]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]ProductUpdateDTO DTO)
         {

@@ -6,6 +6,8 @@ Partial Class ProductDetail
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         lblError.Visible = False
 
+        'The code below needs to be replaced with a call to the backend
+        'View the get product by id method in AspClient.aspx.vb for an example
         If Request.QueryString("ProductID") <> "" Then
             Dim strConn As String = System.Configuration.ConfigurationManager.ConnectionStrings("ConnectionStringOnlineStore").ConnectionString
             Dim connProduct As SqlConnection
@@ -25,6 +27,16 @@ Partial Class ProductDetail
                 imgProduct.Src = "images/product-detail/" + Trim(drProduct.Item("ProductNo")) + ".jpg"
             End If
         End If
+
+        'In this area we need to call the backend "api/category/{categoryId} we will create to get the product information
+
+        'The code below sets the text on the page of the first card
+        'The other three cards need to be set up in the same way
+        lblProductTitle1.Text = "Product 1 Title"
+        lblProductPrice1.Text = "$99.99"
+        lblProductDescription1.Text = "This is where the description goes."
+        hplProduct1.NavigateUrl = "ProductDetail.aspx?ProductId=" + Convert.ToString(6) 'This is how we will link to other products i.e. this is for product 6
+
     End Sub
 
     Protected Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
