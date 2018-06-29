@@ -47,8 +47,15 @@ namespace eCommerceAPI.Controllers
         {
             // In here you will add the code to return the products whose MainCategoryId is equal to categoryId above
             // The method above "api/product/{productId} is VERY similar
+            
+            var categories = _rep.Get<Product>().Where(p =>
+            p.MainCategoryID.Equals(categoryId)).Take(4);
 
-            return Ok("hello! The category Id you chose is: " + categoryId);
+            var categoryJson = Mapper.Map<IEnumerable<ProductDTO>>(categories);
+
+
+
+            return Ok(categoryJson);
         }
 
         //Require valid JWT
