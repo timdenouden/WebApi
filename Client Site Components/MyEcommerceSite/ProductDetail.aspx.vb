@@ -1,31 +1,33 @@
 ﻿Imports System.Data
 Imports System.Data.SqlClient
+Imports System.Net.Http
+Imports Newtonsoft.Json
+
 Partial Class ProductDetail
     Inherits System.Web.UI.Page
+    Dim httpClient As New HttpClient
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         lblError.Visible = False
 
-        'The code below needs to be replaced with a call to the backend
-        'View the get product by id method in AspClient.aspx.vb for an example
         If Request.QueryString("ProductID") <> "" Then
-            Dim strConn As String = System.Configuration.ConfigurationManager.ConnectionStrings("ConnectionStringOnlineStore").ConnectionString
-            Dim connProduct As SqlConnection
-            Dim cmdProduct As SqlCommand
-            Dim drProduct As SqlDataReader
-            Dim strSQL As String = "Select * from Product Where ProductID = " & Request.QueryString("ProductID")
-            connProduct = New SqlConnection(strConn)
-            cmdProduct = New SqlCommand(strSQL, connProduct)
-            connProduct.Open()
-            drProduct = cmdProduct.ExecuteReader(CommandBehavior.CloseConnection)
-            'drProduct.Read()
-            If drProduct.Read() Then
-                lblProductName.Text = drProduct.Item("ProductName")
-                lblProductDescription.Text = drProduct.Item("ProductName")
-                lblPrice.Text = drProduct.Item("Price")
-                lblProductNo.Text = drProduct.Item("ProductNo")
-                imgProduct.Src = "images/product-detail/" + Trim(drProduct.Item("ProductNo")) + ".jpg"
-            End If
+            Dim uri As String = "https://localhost:44338/api/product/" & CInt(Request.QueryString("ProductID"))
+            Dim task = httpClient.GetStringAsync(uri)
+            task.Wait()
+            Dim jsonString As String = task.Result
+            Try
+                Dim productList As List(Of Product) = JsonConvert.DeserializeObject(Of List(Of Product))(jsonString)
+                Dim product = productList.First
+                lblProductName.Text = product.productName
+                lblProductDescription.Text = product.productDescription
+                lblPrice.Text = Convert.ToString(product.price)
+                lblProductNo.Text = Convert.ToString(product.productNo)
+            Catch ex As Exception
+                Console.WriteLine("An error occurred")
+                Response.Redirect("http://localhost:53384/")
+            End Try
+        Else
+            Response.Redirect("http://localhost:53384/")
         End If
 
         'In this area we need to call the backend "api/category/{categoryId} we will create to get the product information
@@ -100,7 +102,7 @@ Partial Class ProductDetail
                 conn.Close()
             End If
         Else
-                lblError.Visible = True
+            lblError.Visible = True
             lblError.Text = "Quantity Entered is Invalid"
         End If
     End Sub
