@@ -30,7 +30,7 @@
                 <div class="ps-product__block ps-product__size">
                         <label>Quantity:</label>
                         <input type="text" id="tbQuantity" runat="server" />                  
-                        <asp:Button class="ps-btn mb-10" ID="btnAdd" runat="server" Text="Add to Cart" />
+                        <asp:Button class="ps-btn mb-10" ID="btnAdd" runat="server" style="padding:20px; line-height:0px;" Text="Add to Cart" />
                 </div>
  
               </div>
@@ -51,11 +51,12 @@
           </div>
           <div class="ps-section__content" style="margin-bottom:50px;">
             <div class="row">
+                <asp:ListBox ID="ListBox1" runat="server"></asp:ListBox>
                 <!-- START OF CARD see ProductDetail.aspx.vb to see how to populate data -->
                 <div class="col-md-2">
                     <div class="card">
                         <div class="card-body">
-                            <img src="images/product/1.jpg" />
+                            <asp:Image ID="Image1" runat="server" />
                             <h5 class="card-title">
                                 <asp:Label ID="lblProductTitle1" runat="server" Text="Label"></asp:Label>
                             </h5>
@@ -78,9 +79,13 @@
                             <h5 class="card-title">
                                 <asp:Label ID="lblProductTitle2" runat="server" Text="Label"></asp:Label>
                             </h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Card link</a>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                <asp:Label ID="lblProductPrice2" runat="server" Text="Label"></asp:Label>
+                            </h6>
+                            <p class="card-text">
+                                <asp:Label ID="lblProductDescription2" runat="server" Text="Label"></asp:Label>
+                            </p>
+                            <asp:HyperLink CssClass="btn btn-primary" ID="hplProduct2" runat="server">View</asp:HyperLink>
                         </div>
                     </div>
                 </div>
@@ -88,10 +93,16 @@
                     <div class="card">
                         <div class="card-body">
                             <img src="images/product/1.jpg" />
-                            <h5 class="card-title">Card title</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Card link</a>
+                            <h5 class="card-title">
+                                <asp:Label ID="lblProductTitle3" runat="server" Text="Label"></asp:Label>
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                <asp:Label ID="lblProductPrice3" runat="server" Text="Label"></asp:Label>
+                            </h6>
+                            <p class="card-text">
+                                <asp:Label ID="lblProductDescription3" runat="server" Text="Label"></asp:Label>
+                            </p>
+                            <asp:HyperLink CssClass="btn btn-primary" ID="hplProduct3" runat="server">View</asp:HyperLink>
                         </div>
                     </div>
                 </div>
@@ -99,10 +110,16 @@
                     <div class="card">
                         <div class="card-body">
                             <img src="images/product/1.jpg" />
-                            <h5 class="card-title">Card title</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Card link</a>
+                            <h5 class="card-title">
+                                <asp:Label ID="lblProductTitle4" runat="server" Text="Label"></asp:Label>
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                <asp:Label ID="lblProductPrice4" runat="server" Text="Label"></asp:Label>
+                            </h6>
+                            <p class="card-text">
+                                <asp:Label ID="lblProductDescription4" runat="server" Text="Label"></asp:Label>
+                            </p>
+                            <asp:HyperLink CssClass="btn btn-primary" ID="hplProduct4" runat="server">View</asp:HyperLink>
                         </div>
                     </div>
                 </div>

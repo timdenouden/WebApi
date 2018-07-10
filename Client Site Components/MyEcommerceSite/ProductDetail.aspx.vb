@@ -22,6 +22,38 @@ Partial Class ProductDetail
                 lblProductDescription.Text = product.productDescription
                 lblPrice.Text = Convert.ToString(product.price)
                 lblProductNo.Text = Convert.ToString(product.productNo)
+
+                Dim uriCategory As String = "https://localhost:44338/api/product/category/" & product.mainCategoryId
+                Dim taskCategory = httpClient.GetStringAsync(uriCategory)
+                Dim jsonCategoryString As String = taskCategory.Result
+                Dim categoryList As List(Of Product) = JsonConvert.DeserializeObject(Of List(Of Product))(jsonCategoryString)
+
+                Dim product1Id = 5
+                Dim product1 = categoryList(0)
+                Image1.ImageUrl = "/images/product/" & product1Id & ".jpg"
+                lblProductTitle1.Text = product1.productName
+                lblProductPrice1.Text = Convert.ToString(product1.price)
+                lblProductDescription1.Text = product1.productDescription
+                hplProduct1.NavigateUrl = "ProductDetail.aspx?ProductId=" + Convert.ToString(product1.productID) 'This is how we will link to other products i.e. this is for product 6
+
+                Dim product2 = categoryList(1)
+                lblProductTitle2.Text = product2.productName
+                lblProductPrice2.Text = Convert.ToString(product2.price)
+                lblProductDescription2.Text = product2.productDescription
+                hplProduct2.NavigateUrl = "ProductDetail.aspx?ProductId=" + Convert.ToString(product2.productID)
+
+                Dim product3 = categoryList(2)
+                lblProductTitle3.Text = product3.productName
+                lblProductPrice3.Text = Convert.ToString(product3.price)
+                lblProductDescription3.Text = product3.productDescription
+                hplProduct3.NavigateUrl = "ProductDetail.aspx?ProductId=" + Convert.ToString(product3.productID)
+
+                Dim product4 = categoryList(3)
+                lblProductTitle4.Text = product4.productName
+                lblProductPrice4.Text = Convert.ToString(product4.price)
+                lblProductDescription4.Text = product4.productDescription
+                hplProduct4.NavigateUrl = "ProductDetail.aspx?ProductId=" + Convert.ToString(product4.productID)
+
             Catch ex As Exception
                 Console.WriteLine("An error occurred")
                 Response.Redirect("http://localhost:53384/")
@@ -29,15 +61,6 @@ Partial Class ProductDetail
         Else
             Response.Redirect("http://localhost:53384/")
         End If
-
-        'In this area we need to call the backend "api/category/{categoryId} we will create to get the product information
-
-        'The code below sets the text on the page of the first card
-        'The other three cards need to be set up in the same way
-        lblProductTitle1.Text = "Product 1 Title"
-        lblProductPrice1.Text = "$99.99"
-        lblProductDescription1.Text = "This is where the description goes."
-        hplProduct1.NavigateUrl = "ProductDetail.aspx?ProductId=" + Convert.ToString(6) 'This is how we will link to other products i.e. this is for product 6
 
     End Sub
 

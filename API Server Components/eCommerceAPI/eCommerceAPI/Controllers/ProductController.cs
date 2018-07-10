@@ -53,8 +53,6 @@ namespace eCommerceAPI.Controllers
 
             var categoryJson = Mapper.Map<IEnumerable<ProductDTO>>(categories);
 
-
-
             return Ok(categoryJson);
         }
 
